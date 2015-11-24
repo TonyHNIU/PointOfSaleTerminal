@@ -40,6 +40,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Terminal\PriceCalculations\ComplexPriceCalculator.cs" />
+    <Compile Include="Terminal\IPriceCalculator.cs" />
+    <Compile Include="Terminal\PointOfSaleProduct.cs" />
+    <Compile Include="Terminal\PointOfSaleTerminal.cs" />
+    <Compile Include="Terminal\PriceCalculations\SingleUnitPriceCalculator.cs" />
+    <Compile Include="Terminal\ProductItemsCounter.cs" />
+    <Compile Include="Terminal\ProductsPriceSetBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

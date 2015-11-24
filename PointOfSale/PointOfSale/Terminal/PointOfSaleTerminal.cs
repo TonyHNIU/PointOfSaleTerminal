@@ -15,7 +15,7 @@ namespace PointOfSale.Terminal
         {
             Contract.Requires(products != null);
 
-            data = products.ToDictionary(p => p.ItemCode, p => new ProductItemsCounter(p.PriceCalculator));
+            data = products.ToDictionary(p => p.ProductCode, p => new ProductItemsCounter(p.PriceCalculator));
         }
 
         public void Scan(string productCode)

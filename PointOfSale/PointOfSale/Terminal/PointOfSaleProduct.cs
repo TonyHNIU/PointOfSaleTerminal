@@ -8,13 +8,13 @@ namespace PointOfSale.Terminal
 {
     public class PointOfSaleProduct
     {
-        public PointOfSaleProduct(string itemCode, IPriceCalculator priceCalculator)
+        public PointOfSaleProduct(string productCode, IPriceCalculator priceCalculator)
         {
-            ItemCode = itemCode;
+            ProductCode = productCode;
             PriceCalculator = priceCalculator;
         }
 
-        public string ItemCode { get; private set; }
+        public string ProductCode { get; private set; }
 
         public IPriceCalculator PriceCalculator { get; private set; }
     }
