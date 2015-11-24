@@ -1,5 +1,9 @@
 # PointOfSaleTerminal
 
+## Travis
+
+[![Build Status](https://travis-ci.org/pugachAG/PointOfSaleTerminal.svg?branch=master)](https://travis-ci.org/pugachAG/PointOfSaleTerminal)
+
 ## Task
 Consider a grocery market where items have prices per unit but also volume prices. For example, doughnuts may be $1.25 each or 3 for $3 dollars. There could only be a single volume discount per product.
 
