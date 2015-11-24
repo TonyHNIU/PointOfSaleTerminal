@@ -5,6 +5,6 @@ install:
   - nuget install NUnit.Runners -Version 3.0.0 -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Release PointOfSale/PointOfSale.sln
-  - mono ./testrunner/NUnit.Runners.3.0.0/tools/nunit-console.exe ./PointOfSale/PointOfSale.Tests/bin/Release/PointOfSale.Tests.dll
+  - mono ./testrunner/NUnit.Console.3.0.0/tools/nunit3-console.exe ./PointOfSale/PointOfSale.Tests/bin/Release/PointOfSale.Tests.dll
 
 
