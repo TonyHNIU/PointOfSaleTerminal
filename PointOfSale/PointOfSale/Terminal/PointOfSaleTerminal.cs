@@ -14,6 +14,7 @@ namespace PointOfSale.Terminal
         public PointOfSaleTerminal(IEnumerable<PointOfSaleProduct> products)
         {
             Contract.Requires(products != null);
+            Contract.Requires(products.Select(p => p.ProductCode).Distinct().Count() == products.Count(), "Single product entry for each product code");
 
             data = products.ToDictionary(p => p.ProductCode, p => new ProductItemsCounter(p.PriceCalculator));
         }
