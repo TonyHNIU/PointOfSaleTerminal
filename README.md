@@ -38,7 +38,7 @@ Here are the minimal inputs you should use for your test cases. These test cases
 * Scan these items in this order: ABCD; Verify the total price is $7.25
 
 ### Part 2
-Update Part 1 implementation to support discount cards. Discount card can be applied to the Terminal and doesn't effects volume price products. Discount card accumulates total amount of spent money and when it reaches some value, discount rate increases (see table below).
+Update Part 1 implementation to support discount cards. Discount card can be applied to the Terminal and doesn't effect volume price products. Discount card accumulates total amount of spent money and when it reaches some value, discount rate increases (see table below).
 
 | Total amount  | Discount rate |
 | :-----------: | :------------ |
