@@ -21,9 +21,9 @@ namespace PointOfSale.Terminal
             itemsCount++;
         }
 
-        public double GetTotalPrice()
+        public double GetTotalPrice(double discountRate)
         {
-            return priceCalculator.CalculatePrice(itemsCount);
+            return priceCalculator.CalculatePrice(itemsCount, discountRate);
         }
     }
 }

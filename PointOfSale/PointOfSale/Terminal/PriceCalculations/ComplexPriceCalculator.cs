@@ -23,9 +23,9 @@ namespace PointOfSale.Terminal.PriceCalculations
             this.volumePrice = volumePrice;
         }
 
-        public double CalculatePrice(int itemsCount)
+        public double CalculatePrice(int itemsCount, double discountRate)
         {
-            return (itemsCount / volumeSize) * volumePrice + singleUnitCalculator.CalculatePrice(itemsCount % volumeSize);
+            return (itemsCount / volumeSize) * volumePrice + singleUnitCalculator.CalculatePrice(itemsCount % volumeSize, discountRate);
         }
     }
 }

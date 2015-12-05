@@ -8,6 +8,6 @@ namespace PointOfSale.Terminal
 {
     public interface IPriceCalculator
     {
-        double CalculatePrice(int itemsCount);
+        double CalculatePrice(int itemsCount, double discountRate);
     }
 }

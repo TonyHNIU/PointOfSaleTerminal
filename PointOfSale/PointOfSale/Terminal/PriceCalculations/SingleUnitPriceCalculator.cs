@@ -18,9 +18,9 @@ namespace PointOfSale.Terminal.PriceCalculations
             this.singleUnitPrice = singleUnitPrice;
         }
 
-        public double CalculatePrice(int itemsCount)
+        public double CalculatePrice(int itemsCount, double discountRate)
         {
-            return singleUnitPrice * itemsCount;
+            return singleUnitPrice * itemsCount * (1.0 - discountRate);
         }
     }
 }

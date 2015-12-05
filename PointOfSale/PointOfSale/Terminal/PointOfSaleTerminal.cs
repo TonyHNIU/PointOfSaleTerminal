@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PointOfSale.Terminal.DiscountCalculations;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
@@ -14,7 +15,8 @@ namespace PointOfSale.Terminal
         public PointOfSaleTerminal(IEnumerable<PointOfSaleProduct> products)
         {
             Contract.Requires(products != null);
-            Contract.Requires(products.Select(p => p.ProductCode).Distinct().Count() == products.Count(), "Single product entry for each product code");
+            Contract.Requires(products.Select(p => p.ProductCode).Distinct().Count() == products.Count(), 
+                              "Single product entry for each product code");
 
             data = products.ToDictionary(p => p.ProductCode, p => new ProductItemsCounter(p.PriceCalculator));
         }
@@ -31,7 +33,21 @@ namespace PointOfSale.Terminal
 
         public double CalculateTotal()
         {
-            return data.Aggregate(0.0, (a, pr) => a + pr.Value.GetTotalPrice());
+            return DoCalculateTotal(0.0);
+        }
+
+        public double CalculateTotal(DiscountCard discountCard)
+        {
+            Contract.Requires(discountCard != null);
+
+            double discountRate = discountCard.DiscountPercents / 100.0;
+            discountCard.AddTotal(DoCalculateTotal());
+            return DoCalculateTotal(discountRate);
+        }
+
+        private double DoCalculateTotal(double discountRate = 0.0)
+        {
+            return data.Aggregate(0.0, (a, pr) => a + pr.Value.GetTotalPrice(discountRate));
         }
     }
 }
