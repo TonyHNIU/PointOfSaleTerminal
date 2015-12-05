@@ -4,7 +4,8 @@
 
 [![Build Status](https://travis-ci.org/pugachAG/PointOfSaleTerminal.svg?branch=master)](https://travis-ci.org/pugachAG/PointOfSaleTerminal)
 
-## Task
+## Task 
+### Part 1
 Consider a grocery market where items have prices per unit but also volume prices. For example, doughnuts may be $1.25 each or 3 for $3 dollars. There could only be a single volume discount per product.
 
 Implement a point-of-sale scanning API that accepts an arbitrary ordering of products (similar to what would happen when actually at a checkout line) then returns the correct total price for an entire shopping cart based on the per unit prices or the volume prices as applicable.
@@ -35,3 +36,15 @@ Here are the minimal inputs you should use for your test cases. These test cases
 * Scan these items in this order: ABCDABA; Verify the total price is $13.25.
 * Scan these items in this order: CCCCCCC; Verify the total price is $6.00.
 * Scan these items in this order: ABCD; Verify the total price is $7.25
+
+### Part 2
+Update Part 1 implementation to support discount cards. Discount card can be applied to the Terminal and doesn't effects volume price products. Discount card accumulates total amount of spent money and when it reaches some value, discount rate increases (see table below).
+
+| Total amount  | Discount rate |
+| :-----------: | :------------ |
+| < 1000 | 1% |
+| 1000-9999 | 5% |
+| >= 10000 | 10% |
+
+After the purchase card total amount should be increased by the base sum (before discount).
+Solution should demonstrate handling series of purchases with discount rate increase.
