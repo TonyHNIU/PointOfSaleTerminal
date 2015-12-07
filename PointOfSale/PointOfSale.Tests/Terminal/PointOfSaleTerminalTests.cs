@@ -46,7 +46,7 @@ namespace PointOfSale.Tests.Terminal
         [TestCase(1, 99.0)]
         [TestCase(3, 200.0)]
         [TestCase(4, 299.0)]
-        public void ApplyDiscountCard_WithDefaultDiscountCard_CorrectTotalValue(int productsCount, double expectedResult)
+        public void ApplyDiscountCard_WithDefaultDiscountCard_CorrectTotalValue(int productsCount, decimal expectedResult)
         {
             var terminal = new PointOfSaleTerminal(
                 new ProductsPriceSetBuilder()
@@ -56,7 +56,7 @@ namespace PointOfSale.Tests.Terminal
 
             ScanStringAsChars(terminal, new string(DefaultProductCode, productsCount));
 
-            AssertDecimalEquals((decimal)expectedResult, terminal.CalculateTotal(discountCard));
+            AssertDecimalEquals(expectedResult, terminal.CalculateTotal(discountCard));
         }
 
 
