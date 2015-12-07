@@ -9,18 +9,18 @@ namespace PointOfSale.Terminal.PriceCalculations
 {
     internal class SingleUnitPriceCalculator : IPriceCalculator
     {
-        private readonly double singleUnitPrice;
+        private readonly decimal singleUnitPrice;
 
-        public SingleUnitPriceCalculator(double singleUnitPrice)
+        public SingleUnitPriceCalculator(decimal singleUnitPrice)
         {
-            Contract.Requires(singleUnitPrice > 0.0);
+            Contract.Requires(singleUnitPrice > 0.0M);
 
             this.singleUnitPrice = singleUnitPrice;
         }
 
-        public double CalculatePrice(int itemsCount, double discountRate)
+        public decimal CalculatePrice(int itemsCount, decimal discountRate)
         {
-            return singleUnitPrice * itemsCount * (1.0 - discountRate);
+            return singleUnitPrice * itemsCount * (1.0M - discountRate);
         }
     }
 }

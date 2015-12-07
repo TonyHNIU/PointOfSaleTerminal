@@ -8,13 +8,13 @@ namespace PointOfSale.Terminal.DiscountCalculations
 {
     public struct DiscountPoint
     {
-        public DiscountPoint(double minimumTotal, int discountPercents) : this()
+        public DiscountPoint(decimal minimumTotal, int discountPercents) : this()
         {
             MinimumTotal = minimumTotal;
             DiscountPrecents = discountPercents;
         }
 
-        public double MinimumTotal { get; set; }
+        public decimal MinimumTotal { get; set; }
 
         public int DiscountPrecents { get; set; }
     }

@@ -31,23 +31,23 @@ namespace PointOfSale.Terminal
             data[productCode].AddItem();
         }
 
-        public double CalculateTotal()
+        public decimal CalculateTotal()
         {
-            return DoCalculateTotal(0.0);
+            return DoCalculateTotal();
         }
 
-        public double CalculateTotal(DiscountCard discountCard)
+        public decimal CalculateTotal(DiscountCard discountCard)
         {
             Contract.Requires(discountCard != null);
 
-            double discountRate = discountCard.DiscountPercents / 100.0;
+            decimal discountRate = discountCard.DiscountPercents / 100.0M;
             discountCard.AddTotal(DoCalculateTotal());
             return DoCalculateTotal(discountRate);
         }
 
-        private double DoCalculateTotal(double discountRate = 0.0)
+        private decimal DoCalculateTotal(decimal discountRate = 0.0M)
         {
-            return data.Aggregate(0.0, (a, pr) => a + pr.Value.GetTotalPrice(discountRate));
+            return data.Aggregate(0.0M, (a, pr) => a + pr.Value.GetTotalPrice(discountRate));
         }
     }
 }

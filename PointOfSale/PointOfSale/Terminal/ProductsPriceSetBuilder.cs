@@ -11,13 +11,13 @@ namespace PointOfSale.Terminal
     {
         private readonly List<PointOfSaleProduct> products = new List<PointOfSaleProduct>();
 
-        public ProductsPriceSetBuilder AddProduct(string productCode, double singleUnitPrice)
+        public ProductsPriceSetBuilder AddProduct(string productCode, decimal singleUnitPrice)
         {
             DoAddProduct(productCode, new SingleUnitPriceCalculator(singleUnitPrice));
             return this;
         }
 
-        public ProductsPriceSetBuilder AddProduct(string productCode, double singleUnitPrice, int volumeSize, double volumePrice)
+        public ProductsPriceSetBuilder AddProduct(string productCode, decimal singleUnitPrice, int volumeSize, decimal volumePrice)
         {
             DoAddProduct(productCode, new ComplexPriceCalculator(singleUnitPrice, volumeSize, volumePrice));
             return this;

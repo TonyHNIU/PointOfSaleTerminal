@@ -10,7 +10,7 @@ namespace PointOfSale.Terminal.DiscountCalculations
     public class DiscountCard
     {
         private readonly List<DiscountPoint> points;
-        private double total = 0.0;
+        private decimal total = 0.0M;
 
         public DiscountCard(int baseDiscount, IEnumerable<DiscountPoint> discountPoints)
         {
@@ -18,7 +18,7 @@ namespace PointOfSale.Terminal.DiscountCalculations
             Contract.Requires(discountPoints.Zip(discountPoints.Skip(1), (a, b) => a.DiscountPrecents < b.DiscountPrecents && a.MinimumTotal < b.MinimumTotal).All(b => b),
                               "Discount points sequence should be monotonically increasing");
 
-            points = (new[] { new DiscountPoint(0.0, baseDiscount) }).Concat(discountPoints).Reverse().ToList();
+            points = (new[] { new DiscountPoint(0.0M, baseDiscount) }).Concat(discountPoints).Reverse().ToList();
         }
 
         public int DiscountPercents
@@ -29,9 +29,9 @@ namespace PointOfSale.Terminal.DiscountCalculations
             }
         }
 
-        public void AddTotal(double sum)
+        public void AddTotal(decimal sum)
         {
-            Contract.Requires(sum >= 0.0);
+            Contract.Requires(sum >= 0.0M);
 
             total += sum;
         }

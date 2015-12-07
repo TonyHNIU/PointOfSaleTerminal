@@ -20,19 +20,19 @@ namespace PointOfSale.Tests.Terminal
         [TestCase("ABCDABA", 13.25)]
         [TestCase("CCCCCCC", 6.0)]
         [TestCase("ABCD", 7.25)]
-        public void ScanProductsSequence_WithDefaultPricesSet_CorrectTotalValue(string productCodes, double expectedResult)
+        public void ScanProductsSequence_WithDefaultPricesSet_CorrectTotalValue(string productCodes, decimal expectedResult)
         {
             var terminal = new PointOfSaleTerminal(
                 new ProductsPriceSetBuilder()
-                    .AddProduct("A", 1.25, 3, 3.0)
-                    .AddProduct("B", 4.25)
-                    .AddProduct("C", 1.0, 6, 5.0)
-                    .AddProduct("D", 0.75)
+                    .AddProduct("A", 1.25M, 3, 3.0M)
+                    .AddProduct("B", 4.25M)
+                    .AddProduct("C", 1.0M, 6, 5.0M)
+                    .AddProduct("D", 0.75M)
                     .GetAllProducts());
 
             ScanStringAsChars(terminal, productCodes);
 
-            Assert.AreEqual(expectedResult, terminal.CalculateTotal(), Delta);
+            AssertDecimalEquals(expectedResult, terminal.CalculateTotal());
         }
 
         [Test]
@@ -50,13 +50,13 @@ namespace PointOfSale.Tests.Terminal
         {
             var terminal = new PointOfSaleTerminal(
                 new ProductsPriceSetBuilder()
-                    .AddProduct(DefaultProductCode.ToString(), 100.0, 3, 200.0)
+                    .AddProduct(DefaultProductCode.ToString(), 100.0M, 3, 200.0M)
                     .GetAllProducts());
             var discountCard = CreateDefaultDiscountCard();
 
             ScanStringAsChars(terminal, new string(DefaultProductCode, productsCount));
 
-            Assert.AreEqual(expectedResult, terminal.CalculateTotal(discountCard), Delta);
+            AssertDecimalEquals((decimal)expectedResult, terminal.CalculateTotal(discountCard));
         }
 
 
@@ -64,23 +64,23 @@ namespace PointOfSale.Tests.Terminal
         [TestCase(9, 99.0)]
         [TestCase(10, 95.0)]
         [TestCase(100, 90.0)]
-        public void DiscountRateChanges_WithDefaultDiscountCard_CorrectTotalValue(int productsCount, double expectedResult)
+        public void DiscountRateChanges_WithDefaultDiscountCard_CorrectTotalValue(int productsCount, decimal expectedResult)
         {
             var discountCard = CreateDefaultDiscountCard();
-            Func<int, double> scanItems = count =>
+            Func<int, decimal> scanItems = count =>
                 {
                     var terminal = new PointOfSaleTerminal(
                         new ProductsPriceSetBuilder()
-                            .AddProduct(DefaultProductCode.ToString(), 100.0)
+                            .AddProduct(DefaultProductCode.ToString(), 100.0M)
                             .GetAllProducts());
                     ScanStringAsChars(terminal, new string(DefaultProductCode, count));
                     return terminal.CalculateTotal(discountCard);
                 };
 
             scanItems(productsCount);
-            double actualResult = scanItems(1);
+            decimal actualResult = scanItems(1);
 
-            Assert.AreEqual(expectedResult, actualResult, Delta);
+            AssertDecimalEquals(expectedResult, actualResult);
         }
         
 
@@ -96,9 +96,14 @@ namespace PointOfSale.Tests.Terminal
         {
             return new DiscountCard(1, new[] 
                 {
-                    new DiscountPoint(1000.0, 5),
-                    new DiscountPoint(10000.0, 10),
+                    new DiscountPoint(1000.0M, 5),
+                    new DiscountPoint(10000.0M, 10),
                 });
+        }
+
+        private void AssertDecimalEquals(decimal expected, decimal actual)
+        {
+            Assert.AreEqual((double)expected, (double)actual, Delta);
         }
     }
 }

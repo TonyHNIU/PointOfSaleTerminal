@@ -21,7 +21,7 @@ namespace PointOfSale.Terminal
             itemsCount++;
         }
 
-        public double GetTotalPrice(double discountRate)
+        public decimal GetTotalPrice(decimal discountRate)
         {
             return priceCalculator.CalculatePrice(itemsCount, discountRate);
         }
